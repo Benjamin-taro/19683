@@ -230,23 +230,23 @@ document.addEventListener('keydown', (e) => {
   });
   
   // 十字キークリックに対応
-  document.querySelectorAll('.d-pad__button').forEach(button => {
+document.querySelectorAll('.d-pad__button').forEach(button => {
     button.addEventListener('click', () => {
-      const direction = button.getAttribute('data-direction'); // ボタンの方向を取得
-      if (direction) {
+    const direction = button.getAttribute('data-direction'); // ボタンの方向を取得
+    if (direction) {
         handleInput(direction); // クリックされた方向を処理
-      }
+    }
     });
-  });
+
     // タッチイベント用に方向を設定
-    document.querySelectorAll('.d-pad__button').forEach(button => {
-        button.addEventListener('touchstart', () => {
-        const direction = button.getAttribute('data-direction');
-        if (direction) {
-            handleInput(direction); // タッチで方向入力を処理
-        }
-        });
+    button.addEventListener('touchstart', (e) => {
+    e.preventDefault(); // タッチイベント後のクリックイベントをキャンセル
+    const direction = button.getAttribute('data-direction');
+    if (direction) {
+        handleInput(direction); // タッチで方向入力を処理
+    }
     });
+});
   
   /**
    * 入力処理関数
