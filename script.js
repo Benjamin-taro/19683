@@ -225,46 +225,41 @@ function isGameOver() {
 /**
  * キー入力 (矢印 or WASD) を受けてタイルを動かす
  */
-document.addEventListener('keydown', (e) => {
-    handleInput(e.key); // キーボード入力を処理
-  });
-  
-  // 十字キークリックに対応
+// 十字キークリックとタッチイベントに対応
 document.querySelectorAll('.d-pad__button').forEach(button => {
     button.addEventListener('click', () => {
-    const direction = button.getAttribute('data-direction'); // ボタンの方向を取得
-    if (direction) {
+      const direction = button.getAttribute('data-direction'); // ボタンの方向を取得
+      if (direction) {
         handleInput(direction); // クリックされた方向を処理
-    }
+      }
     });
-
-    // タッチイベント用に方向を設定
+  
     button.addEventListener('touchstart', (e) => {
-    e.preventDefault(); // タッチイベント後のクリックイベントをキャンセル
-    const direction = button.getAttribute('data-direction');
-    if (direction) {
-        handleInput(direction); // タッチで方向入力を処理
-    }
+      e.preventDefault(); // タッチイベント後のクリックイベントをキャンセル
+      const direction = button.getAttribute('data-direction');
+      if (direction) {
+        handleInput(direction); // タッチされた方向を処理
+      }
     });
-});
+  });
   
   /**
    * 入力処理関数
-   * @param {string} input 入力キーまたは方向 (例: 'ArrowLeft', 'up', 'down'など)
+   * @param {string} input 入力キーまたは方向 (例: 'left', 'right', 'up', 'down')
    */
   function handleInput(input) {
     // 移動前の盤面コピー
     const before = board.map(row => row.slice());
     let moved = false;
   
-    if (input === 'ArrowLeft' || input === 'a' || input === 'left') {
-      moveLeft();  moved = true;
-    } else if (input === 'ArrowRight' || input === 'd' || input === 'right') {
+    if (input === 'left') {
+      moveLeft(); moved = true;
+    } else if (input === 'right') {
       moveRight(); moved = true;
-    } else if (input === 'ArrowUp' || input === 'w' || input === 'up') {
-      moveUp();    moved = true;
-    } else if (input === 'ArrowDown' || input === 's' || input === 'down') {
-      moveDown();  moved = true;
+    } else if (input === 'up') {
+      moveUp(); moved = true;
+    } else if (input === 'down') {
+      moveDown(); moved = true;
     }
   
     // もし実際に盤面が変化したら、新タイルを追加
