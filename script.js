@@ -238,6 +238,15 @@ document.addEventListener('keydown', (e) => {
       }
     });
   });
+    // タッチイベント用に方向を設定
+    document.querySelectorAll('.d-pad__button').forEach(button => {
+        button.addEventListener('touchstart', () => {
+        const direction = button.getAttribute('data-direction');
+        if (direction) {
+            handleInput(direction); // タッチで方向入力を処理
+        }
+        });
+    });
   
   /**
    * 入力処理関数
