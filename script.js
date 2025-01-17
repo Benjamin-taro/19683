@@ -225,6 +225,26 @@ function isGameOver() {
 /**
  * キー入力 (矢印 or WASD) を受けてタイルを動かす
  */
+
+// キーボードイベントを追加
+document.addEventListener('keydown', (e) => {
+    const keyMap = {
+      ArrowLeft: 'left',
+      ArrowRight: 'right',
+      ArrowUp: 'up',
+      ArrowDown: 'down',
+      a: 'left',
+      d: 'right',
+      w: 'up',
+      s: 'down',
+    };
+  
+    const direction = keyMap[e.key];
+    if (direction) {
+      handleInput(direction); // キーボード入力を処理
+    }
+  });
+
 // 十字キークリックとタッチイベントに対応
 document.querySelectorAll('.d-pad__button').forEach(button => {
     button.addEventListener('click', () => {
