@@ -1,0 +1,26 @@
+<!-- game/templates/game/index.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>19683 - 6x6, Triple Merge Only</title>
+
+  <!-- CSS を読み込む -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>2048 (6x6, Triple Merge Only)</h1>
+
+  <div id="score-container">
+    Score: <span id="score">0</span>
+  </div>
+  <div id="board" class="board"></div>
+  <div id="game-over" class="game-over hidden">
+    <p>Game Over!</p>
+    <button id="restart-btn">Restart</button>
+  </div>
+
+  <!-- JSを読み込む -->
+  <script src="script.js"></script>
+</body>
+</html>
