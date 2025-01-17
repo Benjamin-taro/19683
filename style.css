@@ -79,4 +79,49 @@ body {
     margin-top: 10px;
     cursor: pointer;
   }
+ /* 十字キー配置 */
+.d-pad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+  }
+  
+  .middle-row {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .d-pad__button {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #eee;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background 0.2s, transform 0.2s;
+  }
+  
+  .d-pad__button:hover {
+    background: #ddd;
+  }
+  
+  .d-pad__button:active {
+    transform: translateY(2px);
+    background: #ccc;
+  }
+  
+  .d-pad__button.center {
+    background: transparent;
+    border: none;
+    cursor: default;
+    box-shadow: none;
+  }
   

@@ -226,45 +226,64 @@ function isGameOver() {
  * キー入力 (矢印 or WASD) を受けてタイルを動かす
  */
 document.addEventListener('keydown', (e) => {
-  // 移動前の盤面コピー
-  const before = board.map(row => row.slice());
-  let moved = false;
-
-  if (e.key === 'ArrowLeft' || e.key === 'a') {
-    moveLeft();  moved = true;
-  } else if (e.key === 'ArrowRight' || e.key === 'd') {
-    moveRight(); moved = true;
-  } else if (e.key === 'ArrowUp' || e.key === 'w') {
-    moveUp();    moved = true;
-  } else if (e.key === 'ArrowDown' || e.key === 's') {
-    moveDown();  moved = true;
-  }
-
-  // もし実際に盤面が変化したら、新タイルを追加
-  if (moved) {
-    let changed = false;
-    for (let r = 0; r < SIZE; r++) {
-      for (let c = 0; c < SIZE; c++) {
-        if (board[r][c] !== before[r][c]) {
-          changed = true;
-          break;
-        }
+    handleInput(e.key); // キーボード入力を処理
+  });
+  
+  // 十字キークリックに対応
+  document.querySelectorAll('.d-pad__button').forEach(button => {
+    button.addEventListener('click', () => {
+      const direction = button.getAttribute('data-direction'); // ボタンの方向を取得
+      if (direction) {
+        handleInput(direction); // クリックされた方向を処理
       }
-      if (changed) break;
+    });
+  });
+  
+  /**
+   * 入力処理関数
+   * @param {string} input 入力キーまたは方向 (例: 'ArrowLeft', 'up', 'down'など)
+   */
+  function handleInput(input) {
+    // 移動前の盤面コピー
+    const before = board.map(row => row.slice());
+    let moved = false;
+  
+    if (input === 'ArrowLeft' || input === 'a' || input === 'left') {
+      moveLeft();  moved = true;
+    } else if (input === 'ArrowRight' || input === 'd' || input === 'right') {
+      moveRight(); moved = true;
+    } else if (input === 'ArrowUp' || input === 'w' || input === 'up') {
+      moveUp();    moved = true;
+    } else if (input === 'ArrowDown' || input === 's' || input === 'down') {
+      moveDown();  moved = true;
     }
-    if (changed) {
-      placeRandomTile();
-    }
-
-    updateBoard();
-    updateScore();
-
-    // ゲームオーバー判定
-    if (isGameOver()) {
-      gameOverElem.classList.remove('hidden');
+  
+    // もし実際に盤面が変化したら、新タイルを追加
+    if (moved) {
+      let changed = false;
+      for (let r = 0; r < SIZE; r++) {
+        for (let c = 0; c < SIZE; c++) {
+          if (board[r][c] !== before[r][c]) {
+            changed = true;
+            break;
+          }
+        }
+        if (changed) break;
+      }
+      if (changed) {
+        placeRandomTile();
+      }
+  
+      updateBoard();
+      updateScore();
+  
+      // ゲームオーバー判定
+      if (isGameOver()) {
+        gameOverElem.classList.remove('hidden');
+      }
     }
   }
-});
+  
 
 /**
  * Restart ボタン

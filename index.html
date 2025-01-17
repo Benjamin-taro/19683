@@ -19,8 +19,20 @@
     <p>Game Over!</p>
     <button id="restart-btn">Restart</button>
   </div>
+  
+  <!-- 十字キーのボタン -->
+  <div class="d-pad">
+    <button class="d-pad__button up" data-direction="up">↑</button>
+    <div class="middle-row">
+      <button class="d-pad__button left" data-direction="left">←</button>
+      <button class="d-pad__button center" disabled></button>
+      <button class="d-pad__button right" data-direction="right">→</button>
+    </div>
+    <button class="d-pad__button down" data-direction="down">↓</button>
+  </div>
 
   <!-- JSを読み込む -->
   <script src="script.js"></script>
+  
 </body>
 </html>
